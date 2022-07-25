@@ -1,0 +1,12 @@
+:root{
+    --white-bg: #FFFFFF;
+    --red: #FF3333;
+    --fonte-roboto: 'Roboto';
+    --fonte-sora: 'Sora';
+
+}
+
+*{
+	box-sizing: border-box;
+    font-family: var(--fonte-sora);
+ }
