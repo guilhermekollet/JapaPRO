@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "dev": "nodemon ./logistic/server.js",
     "test": "node logistic/app.js"
   },
   "keywords": [],
@@ -11,7 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",
-    "fs": "^0.0.1-security",
-    "readline-sync": "^1.4.10"
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

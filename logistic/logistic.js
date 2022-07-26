@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-class Pedido
+class JapaPRO
 {
     constructor()
     {
