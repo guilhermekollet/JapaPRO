@@ -1,6 +1,6 @@
 import express from "express";
 import db from "./config/dbConnect.js";
-import produtos from "./models/Produto.js";
+import routes from "./routes/index.js"; 
 
 db.on("error", console.log.bind(console, 'Erro de conexão com o MongoDB Atlas'));
 db.once("open", () => {
@@ -8,17 +8,9 @@ db.once("open", () => {
 });
 
 const app = express();
-app.use(express.json());
+routes(app); 
 
 let pedido = new Array;
-
-app.get('/', (req, res) => {
-    res.status(200).send("Japa Dogs");
-});
-
-app.get('/pedido', (req, res) => {
-    res.status(200).json(pedido);
-});
 
 app.post('/pedido', (req, res) => {
     const request = req.body.id;
@@ -62,14 +54,6 @@ app.delete('/pedido/:id', (req, res) =>{
     
     if(_state) res.status(201).send('Item apagado!');
     else res.status(400).send('Item não apagado');
-
-});
-
-app.get('/produtos', (req, res) => {
-    
-    produtos.find((err, produtos) => {
-        res.status(200).json(produtos);
-    });
 
 });
 
