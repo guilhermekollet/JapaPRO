@@ -1,12 +1,11 @@
 import mongoose from "mongoose";
 
 const pedidoSchema = new mongoose.Schema (
-    [{
-        _id: {type: String},
-        _category: {type: String, required: true},
-        _name: {type: String, required: true},
-        _valor: {type: String, required: true}
-    }]
+    {
+        _ordem: {type: String, required: true},
+        _ean: {type: String, required: true},
+        _obs: {type: String}
+    }
 );
 
 const pedidos = mongoose.model('Pedidos', pedidoSchema);

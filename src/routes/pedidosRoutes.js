@@ -4,6 +4,8 @@ import PedidosController from "../controllers/pedidosController.js";
 const router = express.Router();
 
 router
-    .get("/pedido", PedidosController.listarPedidos);
+    .get("/pedido", PedidosController.novoPedido)
+    .post("/pedido", PedidosController.adicionaPedido)
+    .delete("/pedido/:id", PedidosController.deletePedido)
 
 export default router;

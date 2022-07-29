@@ -2,9 +2,10 @@ import mongoose from "mongoose";
 
 const produtoSchema = new mongoose.Schema (
     {
+        _id: Number,
         _category: {type: String, required: true},
         _name: {type: String, required: true},
-        _valor: {type: String, required: true}
+        _valor: {type: String, required: true},
     }
 );
 
