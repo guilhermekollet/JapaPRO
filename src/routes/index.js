@@ -12,9 +12,19 @@ const routes = (app) => {
         if(response)
         {
             console.log(chalk.cyan(`<-- [Render] Home`));    
+            console.log(chalk.greenBright(`<-- [Status] 200`));
         };
 
-        res.status(200).send({titulo: "Japa Dogs"});
+        res.status(200).send({
+            titulo: "Japa Dogs",
+            buttons: [
+                "Novo Pedido",
+                "Produtos",
+                "Cupons",
+                "Ordens"
+            ],
+            pedidos: []
+        });
     });
 
     app.use(
