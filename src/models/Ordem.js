@@ -7,6 +7,6 @@ const ordemSchema = new mongoose.Schema (
     }
 );
 
-const ordem = mongoose.model('Ordem', pedidoSchema);
+const ordem = mongoose.model('ordens', pedidoSchema);
 
 export default ordem;

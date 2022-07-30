@@ -1,65 +1,54 @@
-import pedidos from "../models/Pedido.js";
-import produtos from "../models/Produto.js";
+import cupons from "../models/Cupom.js";
 import response from "../../server.js";
 import chalk from "chalk";
 
-class PedidosController
+class CuponsController
 {
-    static listaPedido = (req, res) => {
+    static listaCupons = (req, res) => {
 
-        console.log(chalk.cyanBright(`Request processed: GET '/pedidos'`));
+        console.log(chalk.cyanBright(`Request processed: GET '/cupons'`));
 
-        produtos.find((err, produtos) => {
-
-            if(err)
-            {
-
-                res.status(500).send({message: err.message});
-                
-                if(response)
-                {
-                    console.log(chalk.blackBright(`--- [Error] Produtos`));
-                    console.log(chalk.redBright(`<-- [Status] 500`));
-                }
-            }
-
-            pedidos.find((err, pedidos) =>{
+            cupons.find((err, cupons) =>{
 
                 if(err)
-                {
-                    console.log(chalk.blackBright(`--- [Error] Pedido`));
-                    console.log(chalk.redBright(`<-- [Status] 500`));
+                { 
                     res.status(500).send({message: err.message});
-                }
 
-                res.status(200).json([produtos, pedidos]);
+                    if(response)
+                    {
+                        console.log(chalk.blackBright(`--- [Error] Cupom`));
+                        console.log(chalk.redBright(`<-- [Status] 500`));
+                    };
+
+                };
+
+                res.status(200).json(cupons);
             
                 if(response)
                 {
-                    console.log(chalk.cyan(`<-- [Render] Produtos`));   
-                    console.log(chalk.cyan(`<-- [Render] Pedido`)); 
+                    console.log(chalk.cyan(`<-- [Render] Cupom`)); 
                     console.log(chalk.greenBright(`<-- [Status] 200`));    
                 };
+
             });
-        });
     };
 
-    static adicionaPedido = (req, res) => {
+    static adicionaCupom = (req, res) => {
         
-        console.log(chalk.cyanBright(`Request processed: POST '/pedidos'`));
+        console.log(chalk.cyanBright(`Request processed: POST '/cupons'`));
 
-        let pedido = new pedidos(req.body);
+        let cupom = new cupons(req.body);
 
-        pedido.save((err) => {
+        cupom.save((err) => {
 
             if(!err)
             {
-                res.status(201).send(pedido.toJSON());
+                res.status(201).send(cupom.toJSON());
 
                 if(response)
                 {
-                    console.log(chalk.cyan(`--> [Sending] Order`));    
-                    console.log(chalk.bgGreenBright(`--- [Save] Order`));  
+                    console.log(chalk.cyan(`--> [Sending] Cupom`));    
+                    console.log(chalk.bgGreenBright(`--- [Save] Cupom`));  
                     console.log(chalk.greenBright(`<-- [Status] 201`)); 
                 };
             }
@@ -69,20 +58,20 @@ class PedidosController
 
                 if(response)
                 {
-                    console.log(chalk.cyan(`--> [Sending] Order`));    
-                    console.log(chalk.blackBright(`--- [Unsave] Order`));  
+                    console.log(chalk.cyan(`--> [Sending] Cupom`));    
+                    console.log(chalk.blackBright(`--- [Unsave] Cupom`));  
                     console.log(chalk.redBright(`<-- [Status] 500`)); 
                 };
             }
         })
     };
 
-    static atualizarPedido = (req, res) => {
+    static atualizarCupom = (req, res) => {
 
         const id = req.params.id;
-        console.log(chalk.cyanBright(`Request processed: PUT '/pedidos/${id}'`));
+        console.log(chalk.cyanBright(`Request processed: PUT '/cupons/${id}'`));
         
-        pedidos.findByIdAndUpdate(id, {$set: req.body}, (err) => {
+        cupons.findByIdAndUpdate(id, {$set: req.body}, (err) => {
 
             if(!err)
             {
@@ -92,7 +81,7 @@ class PedidosController
                 {
                     console.log(chalk.cyan(`--> [Find] ID`)); 
                     console.log(chalk.greenBright(`--- [Finded] ID`)); 
-                    console.log(chalk.bgGreenBright(`--- [Update] Pedido`));  
+                    console.log(chalk.bgGreenBright(`--- [Update] Cupom`));  
                     console.log(chalk.cyan(`<-- [Status] 200`));   
                 };
             }
@@ -110,12 +99,12 @@ class PedidosController
         });
     };
 
-    static deletePedido = (req, res) => {
+    static deleteCupom = (req, res) => {
 
         const id = req.params.id;
-        console.log(chalk.cyanBright(`Request processed: DELETE '/pedidos/${id}'`));
+        console.log(chalk.cyanBright(`Request processed: DELETE '/cupons/${id}'`));
 
-        pedidos.findByIdAndDelete(id, (err) => {
+        cupons.findByIdAndDelete(id, (err) => {
 
             if(!err)
             {
@@ -126,7 +115,7 @@ class PedidosController
                 {
                     console.log(chalk.cyan(`--> [Find] ID`));  
                     console.log(chalk.greenBright(`--- [Finded] ID`));
-                    console.log(chalk.bgGreenBright(`--- [Deleted] Order`));
+                    console.log(chalk.bgGreenBright(`--- [Deleted] Cupom`));
                     console.log(chalk.greenBright(`<-- [Status] 200`));  
                 }
             }
@@ -147,4 +136,4 @@ class PedidosController
 
 }
 
-export default PedidosController;
+export default CuponsController;

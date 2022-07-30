@@ -8,6 +8,6 @@ const pedidoSchema = new mongoose.Schema (
     }
 );
 
-const pedidos = mongoose.model('Pedidos', pedidoSchema);
+const pedidos = mongoose.model('pedidos', pedidoSchema);
 
 export default pedidos;

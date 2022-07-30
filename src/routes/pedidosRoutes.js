@@ -4,7 +4,7 @@ import PedidosController from "../controllers/pedidosController.js";
 const router = express.Router();
 
 router
-    .get("/pedido", PedidosController.novoPedido)
+    .get("/pedido", PedidosController.listaPedido)
     .post("/pedido", PedidosController.adicionaPedido)
     .put("/pedido/:id", PedidosController.atualizarPedido)
     .delete("/pedido/:id", PedidosController.deletePedido)
