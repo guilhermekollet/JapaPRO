@@ -6,9 +6,10 @@ const cupomSchema = new mongoose.Schema(
         _nome: {type: String, required: true},
         _codigo: {type: String, required: true},
         _desconto: {type: Number, required: true},
-        _data_inicio: {type: Date, required: true},
-        _data_fim: {type: Date, required: true},
+        _data_inicio: {type: Date, default: Date.now, required: true},
+        _data_fim: {type: Date, default: Date.now, required: true},
         _ativo: {type: Boolean, required: true},
+        _dataHoraRegistro:{type: Date, default: Date.now, required: true}
 
     },
     {

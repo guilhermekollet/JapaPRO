@@ -2,6 +2,7 @@ import express from "express";
 import produtos from "./produtosRoutes.js";
 import pedidos from "./pedidosRoutes.js";
 import cupons from "./cuponsRoutes.js";
+import ordens from "./ordensRoutes.js";
 import response from "../../server.js";
 import chalk from "chalk";
 
@@ -32,7 +33,8 @@ const routes = (app) => {
         express.json(),
         produtos,
         pedidos,
-        cupons
+        cupons,
+        ordens
     );
 };
 

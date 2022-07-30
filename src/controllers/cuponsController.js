@@ -75,7 +75,7 @@ class CuponsController
 
             if(!err)
             {
-                res.status(200).send({message: `Order Updated`});
+                res.status(200).send({message: `Cupom Updated`});
 
                 if(response)
                 {
@@ -109,7 +109,7 @@ class CuponsController
             if(!err)
             {
                 
-                res.status(200).send({message: `Order Deleted`});
+                res.status(200).send({message: `Cupom Deleted`});
 
                 if(response)
                 {

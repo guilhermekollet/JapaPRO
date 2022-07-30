@@ -1,110 +1,66 @@
-import pedidos from "../models/Pedido.js";
+import ordens from "../models/Ordem.js";
 import produtos from "../models/Produto.js";
 import response from "../../server.js";
 import chalk from "chalk";
 
-class PedidosController
+class OrdensController
 {
-    static listaPedido = (req, res) => {
+    static listaOrdens = (req, res) => {
 
-        console.log(chalk.cyanBright(`Request processed: GET '/pedidos'`));
-
-        produtos.find((err, produtos) => {
-
+        console.log(chalk.cyanBright(`Request processed: GET '/ordens'`));
+    
+        ordens.find().populate("_pedido").exec((err, ordens) => {
+        
             if(!err)
             {
+                res.status(200).json(ordens);
 
-                pedidos.find()
-                    .populate("_produtos")
-                    .exec((err, pedidos) => {
-
-                        if(!err)
-                        {
-                            res.status(200).json([produtos, pedidos]);
-
-                            if(response)
-                            {
-                                console.log(chalk.cyan(`<-- [Render] Produtos`));
-                                console.log(chalk.cyan(`<-- [Render] Pedidos`));
-                                console.log(chalk.greenBright(`<-- [Status] 200`));
-                            }
-                        }
-                        else
-                        {
-                                
-                            res.status(500).send({message: err.message});
-                                
-                            if(response)
-                            {
-                                console.log(chalk.blackBright(`--- [Error] Pedidos`));
-                                console.log(chalk.redBright(`<-- [Status] 500`));
-                            }
-
-                        }                
-                }); 
-
-            }
-            else
-            {
-
-                res.status(500).send({message: err.message});
-                
                 if(response)
                 {
-                    console.log(chalk.blackBright(`--- [Error] Produtos`));
-                    console.log(chalk.redBright(`<-- [Status] 500`));
+                    console.log(chalk.cyan(`<-- [Render] Ordens`));
+                    console.log(chalk.greenBright(`<-- [Status] 200`));
                 }
-            }
 
+            }
         });
-        
     }
         
-    static listaPedidoID = (req, res) => {
+    static listaOrdemID = (req, res) => {
         
         const id = req.params.id;
 
         console.log(chalk.cyanBright(`Request processed: GET '/pedidos/${id}'`));
-
-        pedidos.findById(id).populate("_produtos").exec((err, pedidos) => {
-
+        
+        ordens.findById(id)
+            .populate("_pedido")
+            .exec((err, ordens) => {
+        
             if(!err)
             {
-                res.status(200).send(pedidos);
+                res.status(200).json(ordens);
 
                 if(response)
                 {
-                    console.log(chalk.cyan(`--> [Find] ID`));
-                    console.log(chalk.greenBright(`--- [Finded] ID`)); 
-                    console.log(chalk.greenBright(`<-- [Status] 200`));    
+                    console.log(chalk.cyan(`<-- [Render] Ordens`));
+                    console.log(chalk.greenBright(`<-- [Status] 200`));
                 }
-            }
-            else
-            {
-                res.status(400).send({message: err.message});
 
-                if(response)
-                {
-                    console.log(chalk.cyan(`--> [Find] ID`));
-                    console.log(chalk.blackBright(`--- [Found] ID`)); 
-                    console.log(chalk.yellowBright(`<-- [Status] 400`));
-                }
             }
         });
-        
+
     }
 
-    static adicionaPedido = (req, res) => {
+    static adicionaOrdem = (req, res) => {
         
-        console.log(chalk.cyanBright(`Request processed: POST '/pedidos'`));
+        console.log(chalk.cyanBright(`Request processed: POST '/ordens'`));
 
-        let pedido = new pedidos(req.body);
+        let ordem = new ordens(req.body);
 
-        pedido.save((err) => {
+        ordem.save((err) => {
 
             if(!err)
             {
-                res.status(201).send(pedido.toJSON());
+                res.status(201).send(ordem.toJSON());
 
                 if(response)
                 {
@@ -127,12 +83,12 @@ class PedidosController
         })
     };
 
-    static atualizarPedido = (req, res) => {
+    static atualizarOrdem = (req, res) => {
 
         const id = req.params.id;
-        console.log(chalk.cyanBright(`Request processed: PUT '/pedidos/${id}'`));
+        console.log(chalk.cyanBright(`Request processed: PUT '/ordens/${id}'`));
         
-        pedidos.findByIdAndUpdate(id, {$set: req.body}, (err) => {
+        ordens.findByIdAndUpdate(id, {$set: req.body}, (err) => {
 
             if(!err)
             {
@@ -142,7 +98,7 @@ class PedidosController
                 {
                     console.log(chalk.cyan(`--> [Find] ID`)); 
                     console.log(chalk.greenBright(`--- [Finded] ID`)); 
-                    console.log(chalk.bgGreenBright(`--- [Update] Pedido`));  
+                    console.log(chalk.bgGreenBright(`--- [Update] Order`));  
                     console.log(chalk.cyan(`<-- [Status] 200`));   
                 };
             }
@@ -160,12 +116,12 @@ class PedidosController
         });
     };
 
-    static deletePedido = (req, res) => {
+    static deleteOrdem = (req, res) => {
 
         const id = req.params.id;
         console.log(chalk.cyanBright(`Request processed: DELETE '/pedidos/${id}'`));
 
-        pedidos.findByIdAndDelete(id, (err) => {
+        ordens.findByIdAndDelete(id, (err) => {
 
             if(!err)
             {
@@ -197,4 +153,4 @@ class PedidosController
 
 }
 
-export default PedidosController;
+export default OrdensController;

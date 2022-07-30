@@ -2,11 +2,13 @@ import mongoose from "mongoose";
 
 const ordemSchema = new mongoose.Schema (
     {
-        _name: {type: String, required: true},
-        _valor: {type: String, required: true}
+        id: {type: String},
+        _pedido: {type: mongoose.Schema.Types.ObjectId, ref: "pedidos", required: true},
+        _dataHoraRegistro:{type: Date, default: Date.now, required: true},
+        _status: {type: String, required: true}
     }
 );
 
-const ordem = mongoose.model('ordens', pedidoSchema);
+const ordem = mongoose.model('ordens', ordemSchema);
 
 export default ordem;
