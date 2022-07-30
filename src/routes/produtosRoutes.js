@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
     .get("/produtos", ProdutosController.listarProdutos)
+    .get("/produtos/busca", ProdutosController.listarProdutoEAN)
     .get("/produtos/:id", ProdutosController.listarProdutoID)
 
 export default router;

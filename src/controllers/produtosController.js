@@ -59,6 +59,39 @@ class ProdutosController
             };
         });
     };
+
+    static listarProdutoEAN = (req, res) => {
+        
+        const ean = req.query.ean; //?ean=1234567890123
+        console.log(chalk.cyanBright(`Request processed: GET '/produtos/busca?ean=${ean}'`));
+
+        produtos.find({"_ean": ean}, {}, (err, produtos) => {
+            
+            if(!err)
+            {
+                res.status(200).send(produtos);
+
+                if(response)
+                {
+                    console.log(chalk.cyan(`--> [Find] EAN`));
+                    console.log(chalk.greenBright(`--- [Finded] EAN`)); 
+                    console.log(chalk.greenBright(`<-- [Status] 200`));    
+                }
+            }
+            else
+            {
+                res.status(400).send({message: err.message});
+
+                if(response)
+                {
+                    console.log(chalk.cyan(`--> [Find] EAN`));
+                    console.log(chalk.blackBright(`--- [Found] EAN`)); 
+                    console.log(chalk.yellowBright(`<-- [Status] 400`));
+                }
+            }
+        });
+
+    };
 }
 
 export default ProdutosController;
